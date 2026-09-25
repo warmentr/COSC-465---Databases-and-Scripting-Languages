@@ -1,0 +1,31 @@
+1. Identify the entities
+attendee, session, speaker
+
+2. list the important attributes for each entity
+attendee - attendee_id, name, email
+session - session_id, title, room
+speaker - speaker_id, name
+
+3. identify a primary key for each entity
+attendee - attendee_id
+session - session_id
+speaker - speaker_id
+
+4. identify the relationships between the entities
+Attendee registers for Session.
+Speakers register for Session.
+
+5. determine the cardinality of each relationships
+session to speaker is many to many
+attendee to session is many to many
+
+6. reslove any many-to-many relationships that you identify
+Make an attendance entity to reslove ateendee to session relationship.
+attendance would use foreign keys of attendee_id and session_id. (similar to enrollment)
+
+Make a speaker_enrollment to resolve the session speaker relationship.
+speaker_enrollment would use session_id and speaker_id as foreign keys.
+
+7. Decide where the attended value should be stored
+I would store the attended attribute in the attendance entity I made in
+part 6 that would be a T or F value.
