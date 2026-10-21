@@ -1,0 +1,10 @@
+For this project we are using DBMS
+
+In order to setup this use the schema.sql and insert_data.sql as follows:
+
+sqlite3 yynot.db
+> .read schema.sql
+> .read insert_data.sql
+
+This will create all of the necessary tables and populate them with some synthetic
+data I created designed to resemble some movie fan pages. It also creates one admin and moderator.

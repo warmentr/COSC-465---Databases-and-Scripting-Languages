@@ -1,0 +1,192 @@
+PRAGMA foreign_keys = ON;
+
+BEGIN TRANSACTION;
+
+-- Users
+INSERT INTO Users (UserID, Username, Email, CreatedAt, IsPrivate, Role) VALUES
+(1, 'honey_hive_hq',        'honey.hive@example.com',    '2026-01-12T14:03:00Z', 0, 'user'),
+(2, 'truffula_trees_4ever', 'truffula.fan@example.com',  '2026-01-20T09:41:00Z', 0, 'user'),
+(3, 'rebel_alliance_rae',   'rae.rebel@example.com',     '2026-02-03T18:22:00Z', 0, 'user'),
+(4, 'spice_must_flow',      'arrakis.fan@example.com',   '2026-02-14T21:10:00Z', 1, 'user'),
+(5, 'one_ring_ron',         'ron.fellowship@example.com','2026-03-01T12:00:00Z', 0, 'user'),
+(6, 'mod_mira',             'mira.mod@example.com',      '2026-01-05T08:30:00Z', 0, 'moderator'),
+(7, 'admin_alex',           'alex.admin@example.com',    '2026-01-01T08:00:00Z', 0, 'admin');
+
+-- Posts
+INSERT INTO Posts (PostID, UserID, Content, CreatedAt) VALUES
+(1,  1, 'Rewatched the bee movie tonight and I still cannot get over how weirdly legal the whole plot gets. Courtroom drama with insects is peak cinema. #BeeMovie #Rewatch', '2026-10-20T19:15:00Z'),
+(2,  1, 'Reminder that this movie came out in 2007 and the memes have outlived most blockbusters. #BeeMovie #Memes', '2026-10-18T12:40:00Z'),
+(3,  1, 'Fan thread: if you could only pick one job for life, what would it be? Asking for a pollinator. #BeeMovie', '2026-10-09T16:05:00Z'),
+(4,  2, 'Planted three saplings this weekend. When it comes to trees, more is definitely better. #Lorax #SpeakForTheTrees', '2026-10-19T10:20:00Z'),
+(5,  2, 'The soundtrack of the Lorax movie is catchier than it has any right to be. #Lorax', '2026-10-14T20:45:00Z'),
+(6,  2, 'Reminder: caring about the environment is not a phase. Recycle, reuse, replant. #Lorax #Sustainability', '2026-10-02T08:15:00Z'),
+(7,  3, 'Marathon night: ranking every entry in the saga. Controversial placements incoming. #StarWars', '2026-10-20T22:30:00Z'),
+(8,  3, 'Hear me out: the sequel trilogy everyone loves to hate deserves a second look. #StarWars #HotTake', '2026-10-17T13:00:00Z'),
+(9,  3, 'May the Force be with everyone starting midterms this week. #StarWars #StudentLife', '2026-10-12T07:50:00Z'),
+(10, 4, 'Desert planets, giant worms, and the best sound design of the decade. #Dune #SciFi', '2026-10-19T17:35:00Z'),
+(11, 4, 'Rereading the book before the next film. The politics are denser than I remembered. #Dune #Books', '2026-10-15T21:00:00Z'),
+(12, 4, 'Cinematography appreciation post: sand has never looked this good. #Dune', '2026-10-05T19:25:00Z'),
+(13, 5, 'Extended editions marathon planned for the weekend. Provisions packed, second breakfast scheduled. #LOTR', '2026-10-21T08:30:00Z'),
+(14, 5, 'Unpopular opinion: the scouring of the Shire chapter is underrated, and I miss it in the films. #LOTR #Books', '2026-10-16T18:10:00Z'),
+(15, 5, 'Walking to class felt like a very long journey today. #LOTR #StudentLife', '2026-10-10T11:55:00Z'),
+(16, 6, 'Community reminder: put spoilers behind a warning and be kind in the comments. #CommunityGuidelines', '2026-10-01T09:00:00Z'),
+(17, 7, 'Welcome to the platform! Report anything that breaks the rules and the mod team will take a look. #Welcome #CommunityGuidelines', '2026-09-30T08:00:00Z'),
+(18, 3, 'Crossover idea: a sandworm crashes the trench run. Dune fans, thoughts? #StarWars #Dune #Crossover', '2026-10-21T10:05:00Z'),
+(19, 5, 'Crossover poll: would the Fellowship survive on Arrakis? #LOTR #Dune #Crossover', '2026-10-21T11:20:00Z'),
+(20, 5, 'Anyone who prefers the films to the books has no taste. Fight me. #LOTR #Books', '2026-10-16T21:00:00Z'),
+(21, 1, 'FREE honey giveaway!!! DM me your email address and home address to enter!!! #BeeMovie #Giveaway', '2026-10-19T22:10:00Z');
+
+-- Hashtags (stored without the leading #)
+INSERT INTO Hashtags (HashtagID, Tag) VALUES
+(1,  'BeeMovie'),
+(2,  'Lorax'),
+(3,  'StarWars'),
+(4,  'Dune'),
+(5,  'LOTR'),
+(6,  'Crossover'),
+(7,  'StudentLife'),
+(8,  'Books'),
+(9,  'CommunityGuidelines'),
+(10, 'Sustainability'),
+(11, 'Rewatch'),
+(12, 'Memes'),
+(13, 'SciFi'),
+(14, 'Welcome'),
+(15, 'HotTake'),
+(16, 'SpeakForTheTrees'),
+(17, 'Giveaway');
+
+-- Post_hashtags
+INSERT INTO Post_hashtags (PostID, HashtagID) VALUES
+(1, 1),  (1, 11),
+(2, 1),  (2, 12),
+(3, 1),
+(4, 2),  (4, 16),
+(5, 2),
+(6, 2),  (6, 10),
+(7, 3),
+(8, 3),  (8, 15),
+(9, 3),  (9, 7),
+(10, 4), (10, 13),
+(11, 4), (11, 8),
+(12, 4),
+(13, 5),
+(14, 5), (14, 8),
+(15, 5), (15, 7),
+(16, 9),
+(17, 14),(17, 9),
+(18, 3), (18, 4), (18, 6),
+(19, 5), (19, 4), (19, 6),
+(20, 5), (20, 8),
+(21, 1), (21, 17);
+
+-- Follows (FollowerID follows FolloweeID)
+INSERT INTO Follows (FollowerID, FolloweeID, Status, CreatedAt) VALUES
+(1, 2, 'accepted', '2026-02-01T10:00:00Z'),
+(1, 3, 'accepted', '2026-02-05T10:00:00Z'),
+(1, 5, 'accepted', '2026-03-10T10:00:00Z'),
+(1, 4, 'pending',  '2026-10-18T15:30:00Z'),
+(2, 1, 'accepted', '2026-02-02T11:00:00Z'),
+(2, 5, 'accepted', '2026-03-12T11:00:00Z'),
+(2, 4, 'pending',  '2026-10-19T09:10:00Z'),
+(3, 1, 'accepted', '2026-02-06T12:00:00Z'),
+(3, 2, 'accepted', '2026-02-07T12:00:00Z'),
+(3, 4, 'accepted', '2026-02-20T12:00:00Z'),
+(3, 5, 'accepted', '2026-03-15T12:00:00Z'),
+(4, 3, 'accepted', '2026-02-21T13:00:00Z'),
+(4, 5, 'accepted', '2026-03-16T13:00:00Z'),
+(5, 2, 'accepted', '2026-03-18T14:00:00Z'),
+(5, 3, 'accepted', '2026-03-18T14:05:00Z'),
+(5, 4, 'accepted', '2026-03-19T14:00:00Z'),
+(6, 1, 'accepted', '2026-01-15T09:00:00Z'),
+(6, 2, 'accepted', '2026-01-15T09:05:00Z'),
+(6, 3, 'accepted', '2026-02-10T09:00:00Z'),
+(6, 5, 'accepted', '2026-03-05T09:00:00Z'),
+(6, 7, 'accepted', '2026-01-06T09:00:00Z'),
+(7, 6, 'accepted', '2026-01-06T09:30:00Z'),
+(1, 7, 'accepted', '2026-01-13T10:00:00Z'),
+(2, 7, 'accepted', '2026-01-21T10:00:00Z'),
+(3, 7, 'accepted', '2026-02-04T10:00:00Z'),
+(5, 7, 'accepted', '2026-03-02T10:00:00Z');
+
+-- Comments
+INSERT INTO Comments (CommentID, PostID, UserID, Body, CreatedAt) VALUES
+(1,  1,  3, 'Courtroom scenes with insects is a genre I did not know I needed.',          '2026-10-20T19:40:00Z'),
+(2,  1,  5, 'Honestly the animation holds up better than I expected.',                    '2026-10-20T20:05:00Z'),
+(3,  4,  1, 'Planting trees is the sweetest thing. Bees approve!',                        '2026-10-19T11:00:00Z'),
+(4,  4,  5, 'Let me know if you need help digging, I am good with a shovel.',             '2026-10-19T12:15:00Z'),
+(5,  7,  4, 'Ranking the saga is how friendships end. Respect.',                          '2026-10-20T22:50:00Z'),
+(6,  7,  1, 'Where does the prequel trilogy land?',                                       '2026-10-20T23:10:00Z'),
+(7,  10, 3, 'The sound design in the theater was unreal.',                                '2026-10-19T18:00:00Z'),
+(8,  10, 5, 'My seat was rattling the whole time, in a good way.',                        '2026-10-19T18:30:00Z'),
+(9,  13, 3, 'Invite me, I will bring the snacks.',                                        '2026-10-21T09:00:00Z'),
+(10, 13, 2, 'Sounds like a great weekend. Go outside for a bit afterward!',               '2026-10-21T09:45:00Z'),
+(11, 14, 4, 'Agreed, the book has a bleaker and more interesting ending.',                '2026-10-16T19:00:00Z'),
+(12, 18, 4, 'A sandworm would end that battle in one bite.',                              '2026-10-21T10:30:00Z'),
+(13, 18, 1, 'Bees versus worms. I have questions.',                                       '2026-10-21T10:50:00Z'),
+(14, 19, 4, 'The Fellowship would not last a day without water.',                         '2026-10-21T11:45:00Z'),
+(15, 19, 3, 'Gandalf in a stillsuit is all I am saying.',                                 '2026-10-21T12:00:00Z'),
+(16, 16, 7, 'Thanks for keeping things tidy, Mira.',                                      '2026-10-01T09:30:00Z'),
+(17, 21, 6, 'Looking into this one.',                                                     '2026-10-20T12:00:00Z'),
+(18, 20, 3, 'Books and films can both be great!',                                         '2026-10-16T21:30:00Z');
+
+-- Likes
+INSERT INTO Likes (LikeID, UserID, PostID, CreatedAt) VALUES
+(1,  2, 1,  '2026-10-20T19:30:00Z'),
+(2,  3, 1,  '2026-10-20T19:35:00Z'),
+(3,  5, 1,  '2026-10-20T20:00:00Z'),
+(4,  3, 2,  '2026-10-18T13:00:00Z'),
+(5,  6, 2,  '2026-10-18T14:00:00Z'),
+(6,  1, 4,  '2026-10-19T10:45:00Z'),
+(7,  3, 4,  '2026-10-19T11:30:00Z'),
+(8,  5, 4,  '2026-10-19T12:10:00Z'),
+(9,  6, 4,  '2026-10-19T13:00:00Z'),
+(10, 1, 5,  '2026-10-14T21:00:00Z'),
+(11, 3, 5,  '2026-10-14T21:30:00Z'),
+(12, 1, 6,  '2026-10-02T09:00:00Z'),
+(13, 5, 6,  '2026-10-02T10:00:00Z'),
+(14, 7, 6,  '2026-10-02T11:00:00Z'),
+(15, 1, 7,  '2026-10-20T22:45:00Z'),
+(16, 4, 7,  '2026-10-20T22:55:00Z'),
+(17, 5, 7,  '2026-10-20T23:00:00Z'),
+(18, 2, 8,  '2026-10-17T14:00:00Z'),
+(19, 4, 8,  '2026-10-17T15:00:00Z'),
+(20, 1, 10, '2026-10-19T18:10:00Z'),
+(21, 3, 10, '2026-10-19T18:05:00Z'),
+(22, 5, 10, '2026-10-19T18:20:00Z'),
+(23, 3, 11, '2026-10-15T21:30:00Z'),
+(24, 5, 11, '2026-10-15T22:00:00Z'),
+(25, 2, 13, '2026-10-21T09:30:00Z'),
+(26, 3, 13, '2026-10-21T08:50:00Z'),
+(27, 4, 13, '2026-10-21T09:10:00Z'),
+(28, 3, 14, '2026-10-16T18:40:00Z'),
+(29, 4, 14, '2026-10-16T18:50:00Z'),
+(30, 1, 16, '2026-10-01T09:20:00Z'),
+(31, 2, 16, '2026-10-01T09:25:00Z'),
+(32, 3, 16, '2026-10-01T10:00:00Z'),
+(33, 4, 16, '2026-10-01T10:30:00Z'),
+(34, 5, 16, '2026-10-01T11:00:00Z'),
+(35, 7, 16, '2026-10-01T09:30:00Z'),
+(36, 1, 17, '2026-09-30T09:00:00Z'),
+(37, 2, 17, '2026-09-30T09:10:00Z'),
+(38, 3, 17, '2026-09-30T09:20:00Z'),
+(39, 4, 17, '2026-09-30T09:30:00Z'),
+(40, 5, 17, '2026-09-30T09:40:00Z'),
+(41, 6, 17, '2026-09-30T09:50:00Z'),
+(42, 1, 18, '2026-10-21T10:40:00Z'),
+(43, 4, 18, '2026-10-21T10:25:00Z'),
+(44, 5, 18, '2026-10-21T10:35:00Z'),
+(45, 1, 19, '2026-10-21T11:50:00Z'),
+(46, 3, 19, '2026-10-21T11:55:00Z'),
+(47, 4, 19, '2026-10-21T11:40:00Z');
+
+-- Reports
+INSERT INTO Reports (ReportID, PostID, ReporterID, Reason, Status, CreatedAt, ReviewedBy, ReviewedAt) VALUES
+(1, 21, 2, 'Spam: giveaway asking for personal and home addresses', 'open',      '2026-10-20T09:00:00Z', NULL, NULL),
+(2, 21, 3, 'Looks like a phishing attempt',                         'open',      '2026-10-20T11:30:00Z', NULL, NULL),
+(3, 21, 5, 'Spam',                                                  'open',      '2026-10-20T13:15:00Z', NULL, NULL),
+(4, 20, 1, 'Hostile tone toward other fans',                        'dismissed', '2026-10-17T08:00:00Z', 6,    '2026-10-18T14:00:00Z'),
+(5, 8,  5, 'Inflammatory take',                                     'dismissed', '2026-10-17T18:00:00Z', 6,    '2026-10-18T10:00:00Z'),
+(6, 20, 2, 'Harassment toward people who prefer the films',         'reviewed',  '2026-10-17T09:00:00Z', 7,    '2026-10-18T15:00:00Z');
+
+COMMIT;
