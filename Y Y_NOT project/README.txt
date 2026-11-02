@@ -1,5 +1,6 @@
 DBMS USED: I am using sqlite3 for this project.
 
+Past Deliverables:
 In order to setup this use the schema.sql and insert_data.sql as follows:
 
 sqlite3 yynot.db
